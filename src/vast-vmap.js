@@ -642,6 +642,7 @@ function VASTAd(vast, root, parentAd, onAdAvailable) {
   this.onAdAvailable = onAdAvailable;
   this.abortLimit = parentAd ? parentAd.abortLimit > 0 ? parentAd.abortLimit - 1 :
     parentAd.abortLimit : VAST_VMAP_XHROptions.defaultVASTAbortLimit;
+  this.id = null;
   this.sequence = null;
   this.hasContent = true;
   this.loaded = true;
@@ -693,6 +694,10 @@ function VASTAd(vast, root, parentAd, onAdAvailable) {
 
   if (this.nonlinearsTracking === null) {
     this.nonlinearsTracking = new TrackingEvents(null, this);
+  }
+
+  if (root.hasAttribute('id')) {
+  	this.id = root.getAttribute('id');
   }
 
   if (root.hasAttribute('sequence')) {
