@@ -885,6 +885,23 @@ VASTAd.prototype.onLoaded = function(ads, allowPods) {
 };
 
 /**
+ * Pings the InLine Ad impression URLs if they have not already been sent for this ad
+ */
+VASTAd.prototype.sendImpression = function () {
+	var ad = this;
+	var tracker = new TrackingEvents(null, this);
+
+	// Gather the impression URLs we should ping
+	while (ad !== null && !ad.hasSentImpression()) {
+		ad.impressionSent();
+		for (var i = 0; i < ad.impressions.length; i++) {
+			tracker.finger(ad.impressions[i]);
+		}
+		ad = ad.parentAd;
+	}
+}
+
+/**
  * Returns true if impression metrics has been sent for this ad, false otherwise
  *
  * @returns {boolean} true if impression metrics have been sent, false otherwise
