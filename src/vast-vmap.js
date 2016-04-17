@@ -1572,6 +1572,9 @@ function VASTCompanion(ad, root) {
   if (el.length) {
     this.altText = el.item(0).textContent.replace(/\s/g, "");
   }
+
+  this.width = root.hasAttribute('width') ? parseInt(root.getAttribute('width')) : null;
+  this.height = root.hasAttribute('height') ? parseInt(root.getAttribute('height')) : null;
 }
 
 VASTCompanion.prototype = Object.create(VASTStatic.prototype);
